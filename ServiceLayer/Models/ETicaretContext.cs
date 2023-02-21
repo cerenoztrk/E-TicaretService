@@ -15,7 +15,9 @@ public partial class ETicaretContext : DbContext
     {
     }
     public virtual DbSet<VMusteri> VMusteriler { get; set; }
+
     public virtual DbSet<VUrun> VUrunler { get; set; }
+
     public virtual DbSet<Cinsiyet> Cinsiyets { get; set; }
 
     public virtual DbSet<Musteri> Musteris { get; set; }
@@ -49,6 +51,7 @@ public partial class ETicaretContext : DbContext
         modelBuilder.Entity<VMusteri>(entity =>
         {
             entity.ToView("VMusteri");
+            entity.HasNoKey();
 
 
         });

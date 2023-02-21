@@ -9,6 +9,7 @@ namespace ServiceLayer.Controllers
     public class MusteriController : Controller
     {
         [HttpGet]
+
         public ActionResult<List<VMusteri>> Index()
         {
             ETicaretContext ctx = new ETicaretContext();
@@ -16,6 +17,7 @@ namespace ServiceLayer.Controllers
             return ctx.VMusteriler.ToList();
         }
         [HttpPost]
+
         public IActionResult addNew(MusteriParam vm)
         {
 
