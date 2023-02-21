@@ -11,8 +11,10 @@ public partial class Urun
 
     public string UrunKodu { get; set; } = null!;
 
+    //ParaBirimi
     public int ParaBirimiId { get; set; }
 
+    //Fiyat
     public decimal Fiyati { get; set; }
 
     public int Stok { get; set; }

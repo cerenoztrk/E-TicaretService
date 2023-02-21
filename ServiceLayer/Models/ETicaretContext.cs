@@ -14,7 +14,8 @@ public partial class ETicaretContext : DbContext
         : base(options)
     {
     }
-
+    public virtual DbSet<VMusteri> VMusteriler { get; set; }
+    public virtual DbSet<VUrun> VUrunler { get; set; }
     public virtual DbSet<Cinsiyet> Cinsiyets { get; set; }
 
     public virtual DbSet<Musteri> Musteris { get; set; }
@@ -41,15 +42,30 @@ public partial class ETicaretContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=E-Ticaret;User Id=sa; Password=1234;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=.\\;Database=E-Ticaret;User Id=sa; Password=1234;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<VMusteri>(entity =>
+        {
+            entity.ToView("VMusteri");
+
+
+        });
+
+        modelBuilder.Entity<VUrun>(entity =>
+        {
+            entity.ToView("VUrun");
+            entity.HasNoKey();
+
+        });
+
+
         modelBuilder.Entity<Cinsiyet>(entity =>
         {
             entity.ToTable("Cinsiyet");
 
-            entity.Property(e => e.CinsiyetId).HasColumnName("CinsiyetID");
+            entity.Property(e => e.ID).HasColumnName("CinsiyetID");
             entity.Property(e => e.Cinsiyet1)
                 .HasMaxLength(10)
                 .IsFixedLength()
@@ -81,10 +97,10 @@ public partial class ETicaretContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Musteri_Cinsiyet");
 
-            entity.HasOne(d => d.MusteriNavigation).WithOne(p => p.Musteri)
-                .HasForeignKey<Musteri>(d => d.MusteriId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Musteri_Sehir");
+            //entity.HasOne(d => d.MusteriNavigation).WithOne(p => p.Musteri)
+            //    .HasForeignKey<Musteri>(d => d.MusteriId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Musteri_Sehir");
         });
 
         modelBuilder.Entity<Odeme>(entity =>

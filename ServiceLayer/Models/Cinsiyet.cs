@@ -5,8 +5,9 @@ namespace ServiceLayer.Models;
 
 public partial class Cinsiyet
 {
-    public int CinsiyetId { get; set; }
+    public int ID { get; set; }
 
+    //Cinsiyet
     public string Cinsiyet1 { get; set; } = null!;
 
     public virtual ICollection<Musteri> Musteris { get; } = new List<Musteri>();

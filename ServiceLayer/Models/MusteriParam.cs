@@ -7,28 +7,26 @@ using System.Text.Json.Serialization;
 
 namespace ServiceLayer.Models;
 
-public partial class Musteri
+public partial class MusteriParam
 {
-    //[JsonProperty(PropertyName = "ID")]
-    [JsonPropertyName("ID")]
-    public int MusteriId { get; set; }
+
+
 
     public string MusteriAdi { get; set; } = null!;
 
     public string MusteriSoyadi { get; set; } = null!;
 
-    //Cinsiyet
-    public int CinsiyetId { get; set; }
+
+    public int Cinsiyet { get; set; }
 
     public DateTime? DogumTarihi { get; set; }
 
     public string? Adres { get; set; }
 
-    //Sehir
-    public int SehirId { get; set; }
 
-    [JsonIgnore]
-    public virtual Cinsiyet Cinsiyet { get; set; } = null!;
+    public int Sehir { get; set; }
+
+
 
     //[NotMapped]
     //[JsonPropertyName("Cinsiyet")]
@@ -37,12 +35,4 @@ public partial class Musteri
     //[JsonIgnore]
     //public virtual Sehir MusteriNavigation { get; set; } = null!;
 
-    [JsonIgnore]
-    public virtual ICollection<Odeme> Odemes { get; } = new List<Odeme>();
-
-    [JsonIgnore]
-    public virtual ICollection<Sipari> Siparis { get; } = new List<Sipari>();
-
-    [JsonIgnore]
-    public virtual ICollection<Tahsilat> Tahsilats { get; } = new List<Tahsilat>();
 }
